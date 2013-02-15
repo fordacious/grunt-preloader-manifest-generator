@@ -1,0 +1,39 @@
+{
+  "name": "grunt-preloader-manifest-generator",
+  "description": "Generates a csv file of assets so they can be preloaded by whatever preloading library you wish",
+  "version": "0.1.0",
+  "homepage": "https://github.com/shadowford/grunt-preloader-manifest-generator",
+  "author": {
+    "name": "Lachlan Ford",
+    "email": "fordyfor@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shadowford/grunt-preloader-manifest-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shadowford/grunt-preloader-manifest-generator/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/shadowford/grunt-preloader-manifest-generator/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-clean": "~0.4.0a",
+    "grunt-contrib-nodeunit": "~0.1.0",
+    "grunt": "~0.4.0rc4"
+  },
+  "keywords": [
+    "gruntplugin", "preload", "images", "assets", "games"
+  ]
+}
