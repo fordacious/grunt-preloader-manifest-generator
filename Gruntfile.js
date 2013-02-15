@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     },
 
     // Configuration to be run (and then tested).
-    generatePreloaderManifest: {
+    preloadManifest: {
       data: {
         srcDir   : 'app/',
         assetsDir: 'app/assets/',
@@ -49,9 +49,9 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['generatePreloaderManifest']);
+  grunt.registerTask('test', ['preloadManifest']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'generatePreloaderManifest']);
+  grunt.registerTask('default', ['jshint', 'preloadManifest']);
 
 };

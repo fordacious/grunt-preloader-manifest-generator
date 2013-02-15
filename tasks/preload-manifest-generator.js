@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 
 	var fs = require("fs");
 
-	grunt.registerMultiTask('generatePreloaderManifest', 'Generates a generic manifest file for use with whatever preloading library you like', function () {
+	grunt.registerMultiTask('preloadManifest', 'Generates a generic manifest file for use with whatever preloading library you like', function () {
 
 		if (this.data.srcDir && this.data.assetsDir) {
 			grunt.log.writeln("Generating manifest for " + this.data.assetsDir);
