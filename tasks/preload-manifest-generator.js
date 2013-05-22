@@ -73,7 +73,6 @@ module.exports = function (grunt) {
 			var manifest = "";
 			for (var i = 0 ; i < dirs.length; i ++) {
 				manifest += getManifestForDirectory (dirs[i]);
-				grunt.log.writeln(manifest);
 			}
 
 			manifest.replace("//","/");
