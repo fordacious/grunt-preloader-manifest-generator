@@ -7,11 +7,11 @@
 
  /* Usage: 
 
-		requires a srcDir and assetsDir, generates a single line, comma delimited csv
+		requires asset directories "assetDirs" as an array, generates a single line, comma delimited csv
 		with the location of each asset. I plan to add metadata like filesizes
 		and other useful things that might help with preloaders. It is very general
 		so it can be used with any preloader library as long as you convert the data to 
-		the required format.
+		the required format. The first asset directory is considered the main one and is where the manifest is placed.
 
  */
 
@@ -22,26 +22,26 @@ module.exports = function (grunt) {
 
 	grunt.registerMultiTask('preloadManifest', 'Generates a generic manifest file for use with whatever preloading library you like', function () {
 
-		if (this.data.srcDir && this.data.assetsDir) {
-			grunt.log.writeln("Generating manifest for " + this.data.assetsDir);
+		if (this.data.assetDirs) {
+			for (var i in this.data.assetDirs) {
+				grunt.log.writeln("Generating manifest for " + this.data.assetDirs[i]);
+			}
 		} else {
-			throw new Error ("srcDir or assetsDir not specified");
+			throw new Error ("assetDirs not specified");
 		}
 
-		//TODO check trailing slash
-
-		var dir = this.data.assetsDir;
-		var override = this.data.overwriteManifest;
+		var dirs = this.data.assetDirs;
+		var overwrite = this.data.overwriteManifest;
 		var fileExists;
 		
 		var header = "Dir, Type, ID, Size\n";
 
 		var dataToWrite;
 
-		fileExists = fs.existsSync (dir + "manifest.csv");
+		fileExists = fs.existsSync (dirs[0] + "manifest.csv");
 
-		if (!override) {
-			override = false;
+		if (!overwrite) {
+			overwrite = false;
 		}
 
 		function getManifestForDirectory (dir) {
@@ -64,17 +64,23 @@ module.exports = function (grunt) {
 			return soFar;
 		}
 
-		if (!fileExists || (fileExists && override)) {
-			if (fileExists && override) {
+		if (!fileExists || (fileExists && overwrite)) {
+			if (fileExists && overwrite) {
 				grunt.log.writeln("Deleting old manifest file");
-				fs.unlinkSync (dir + "manifest.csv");
+				fs.unlinkSync (dirs[0] + "manifest.csv");
 			}
 
-			var manifest = getManifestForDirectory (dir);
+			var manifest = "";
+			for (var i = 0 ; i < dirs.length; i ++) {
+				manifest += getManifestForDirectory (dirs[i]);
+				grunt.log.writeln(manifest);
+			}
+
+			manifest.replace("//","/");
 			manifest = manifest.slice(1,manifest.length);
 
-			grunt.log.writeln ("writing file " + dir + "manifest.csv");
-			fs.writeFileSync(dir + "manifest.csv", manifest);
+			grunt.log.writeln ("writing file " + dirs[0] + "manifest.csv");
+			fs.writeFileSync(dirs[0] + "manifest.csv", manifest);
 
 
 		} else {

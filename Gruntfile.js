@@ -26,8 +26,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     preloadManifest: {
       data: {
-        srcDir   : 'app/',
-        assetsDir: 'app/assets/',
+        assetDirs: ['app/assets/','seconddir/'],
         overwriteManifest: true
       }
     },
